@@ -1449,6 +1449,9 @@
     <!-- إشعار -->
     <div class="toast" id="toast"></div>
 
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
+
     <script>
         // =====================================================================
         // منصة أشرقت للفكر الحر ونشر الفن - النسخة الكاملة
@@ -2487,9 +2490,12 @@
             db.ref('platform_data/posts').set(posts);
             db.ref('platform_data/books').set(books);
             db.ref('platform_data/artworks').set(artworks);
+            db.ref('platform_data/users').set(members); // حل مشكلة: الحساب غير موجود
 
-            // الحساب الحالي يمكن أن يبقى في الذاكرة المحلية للجهاز لحفظ الجلسة
-            if (currentUser) Store.set('currentUser', currentUser);
+            // الاحتفاظ بجلسة تسجيل الدخول الحالية للمستخدم على جهازه فقط
+            if (typeof currentUser !== 'undefined' && currentUser) {
+                Store.set('currentUser', currentUser);
+            }
         }
 
         // دالة لجلب البيانات أونلاين فور فتح أي مستخدم للموقع
