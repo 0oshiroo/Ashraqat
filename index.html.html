@@ -2490,22 +2490,22 @@
         const db = firebase.database();
 
         // تعديل دالة الحفظ لتصبح "المصدر الحقيقي" أونلاين للجميع
+        let firebaseLoaded = false;
+
         function persist() {
-            // حفظ محلي (لتجربة/جلب سريع)
-            Store.set('posts', posts);
-            Store.set('books', books);
-            Store.set('artworks', artworks);
-            Store.set('members', members);
+            // منع التعارض: أثناء أول تحميل Firebase لا نكتب عليه.
+            if (!firebaseLoaded) return;
+
+            // لا نحفظ المصفوفات العامة في localStorage هنا (لمنع أي تداخل).
             if (currentUser) Store.set('currentUser', currentUser);
 
-            // حفظ أونلاين بصيغة آمنة: بدلاً من set لقائمة كاملة (قد يسبب تعارض/عدم تطابق)
-            // نكتب كل نوع تحت key باسم معرف العنصر.
-            // ملاحظة: هذا يحافظ على الواجهة لأننا نبقي arrays في الذاكرة.
+            // حفظ أونلاين (كل نوع على حدة)
             db.ref('platform_data/posts').set(Object.fromEntries(posts.map(p => [p.id, p])));
             db.ref('platform_data/books').set(Object.fromEntries(books.map(p => [p.id, p])));
             db.ref('platform_data/artworks').set(Object.fromEntries(artworks.map(a => [a.id, a])));
             db.ref('platform_data/users').set(Object.fromEntries((members || []).map(m => [m.username, m])));
         }
+
 
         // دالة لجلب البيانات أونلاين فور فتح أي مستخدم للموقع
         function loadOnlineData() {
@@ -2525,8 +2525,12 @@
                 // إعادة حساب likes للمرجعية
                 recalcAuthorLikes();
                 renderAll();
+
+                // بعد وصول البيانات فعلياً نسمح بالحفظ/المزامنة
+                firebaseLoaded = true;
             });
         }
+
 
 
         // استدعي دالة التحميل السحابي عند تشغيل الموقع بدلاً من التحميل المحلي القديم
