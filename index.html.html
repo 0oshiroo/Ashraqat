@@ -1469,10 +1469,14 @@
         };
 
         let currentUser = Store.get('currentUser', null);
-        let posts = Store.get('posts', []);
-        let books = Store.get('books', []);
-        let artworks = Store.get('artworks', []);
-        let members = Store.get('members', []);
+
+        // مهم: البيانات العامة لا تُحمل من localStorage لأن persist المحلي كان يسبب تعارض مع Firebase.
+        // سنملأها فقط من Firebase.
+        let posts = [];
+        let books = [];
+        let artworks = [];
+        let members = [];
+
         let currentTab = 'feed';
         let feedSort = 'newest';
         let editorContext = null;
@@ -2455,13 +2459,11 @@
         }
 
         // ============ الإقلاع ============
-        posts = Store.get('posts', posts);
-        books = Store.get('books', books);
-        artworks = Store.get('artworks', artworks);
-        members = Store.get('members', members);
+        // نترك posts/books/artworks/members للتحميل من Firebase فقط.
+        // recalcAuthorLikes() و renderAll() سيتم استدعاؤهما بعد وصول بيانات Firebase.
 
-        recalcAuthorLikes();
         renderAll();
+
 
         const urlParams = new URLSearchParams(window.location.search);
         const userParam = urlParams.get('u');
