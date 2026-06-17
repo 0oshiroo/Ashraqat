@@ -1,0 +1,2521 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>منصة أشرقت للفكر الحر ونشر الفن ☀️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@400;500;700;800&display=swap"
+        rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #050505;
+            --card: #121212;
+            --card-2: #1a1a1a;
+            --gold: #e8b54a;
+            --gold-soft: #f4d28a;
+            --gold-glow: rgba(232, 181, 74, 0.35);
+            --blue: #4aa3e8;
+            --red: #e8484a;
+            --text: #f3ece0;
+            --muted: #8c867a;
+            --border: rgba(232, 181, 74, 0.16);
+            --shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Tajawal', 'Amiri', system-ui, sans-serif;
+            min-height: 100vh;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            color: var(--blue);
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        ::selection {
+            background: var(--gold);
+            color: #000;
+        }
+
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #2a2a2a;
+            border-radius: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gold);
+        }
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 80;
+            background: rgba(5, 5, 5, 0.92);
+            backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .topbar-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+        }
+
+        .brand .sun {
+            font-size: 26px;
+            filter: drop-shadow(0 0 8px var(--gold-glow));
+            animation: spin 18s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .brand h1 {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--gold);
+            letter-spacing: 0.2px;
+        }
+
+        .brand small {
+            display: block;
+            font-size: 11px;
+            color: var(--muted);
+            font-weight: 500;
+        }
+
+        .nav-desktop {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 700;
+            padding: 9px 14px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.22s;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .nav-btn .ic {
+            font-size: 18px;
+        }
+
+        .nav-btn:hover {
+            color: var(--gold);
+            background: rgba(232, 181, 74, 0.07);
+        }
+
+        .nav-btn.active {
+            color: var(--gold);
+            background: rgba(232, 181, 74, 0.13);
+            box-shadow: inset 0 0 0 1px var(--border);
+        }
+
+        .auth-area {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .mini-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+            cursor: pointer;
+        }
+
+        .btn {
+            font-family: inherit;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            color: #000;
+            padding: 10px 18px;
+            font-size: 14px;
+            box-shadow: 0 4px 18px var(--gold-glow);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 26px var(--gold-glow);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--gold);
+            border: 1px solid var(--border);
+            padding: 9px 16px;
+            font-size: 13px;
+        }
+
+        .btn-ghost:hover {
+            background: rgba(232, 181, 74, 0.08);
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 26px 16px 120px;
+        }
+
+        .tab-section {
+            display: none;
+            animation: fade 0.4s ease;
+        }
+
+        .tab-section.active {
+            display: block;
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+
+            to {
+                opacity: 1;
+                transform: none;
+            }
+        }
+
+        .section-head {
+            margin-bottom: 22px;
+            text-align: center;
+        }
+
+        .section-head h2 {
+            font-size: 24px;
+            color: var(--gold);
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .section-head p {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .composer {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 22px;
+            box-shadow: var(--shadow);
+        }
+
+        .composer textarea,
+        .composer input[type="text"] {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid #262626;
+            color: var(--text);
+            border-radius: 12px;
+            padding: 12px 14px;
+            font-family: inherit;
+            font-size: 15px;
+            resize: vertical;
+            margin-bottom: 10px;
+        }
+
+        .composer textarea:focus,
+        .composer input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .composer-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .card-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .card-head img {
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--gold);
+        }
+
+        .card-head .meta b {
+            color: var(--gold-soft);
+            font-size: 15px;
+        }
+
+        .card-head .meta span {
+            display: block;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .post-title {
+            font-size: 19px;
+            font-weight: 800;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .post-body {
+            font-size: 15px;
+            color: var(--text);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .post-body a {
+            color: var(--blue);
+        }
+
+        .card-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid #222;
+            flex-wrap: wrap;
+        }
+
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--muted);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border-radius: 10px;
+            transition: all 0.18s;
+        }
+
+        .icon-btn:hover {
+            background: #1d1d1d;
+            color: var(--gold);
+        }
+
+        .icon-btn.liked {
+            color: var(--red);
+        }
+
+        .icon-btn .heart {
+            font-size: 17px;
+        }
+
+        .founder-del {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: var(--red);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 7px 11px;
+            font-family: inherit;
+            font-weight: 800;
+            font-size: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(232, 72, 74, 0.5);
+            z-index: 5;
+        }
+
+        .founder-del:hover {
+            background: #ff5e60;
+        }
+
+        .comments {
+            margin-top: 14px;
+        }
+
+        .comment {
+            background: var(--card-2);
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .comment b {
+            color: var(--gold-soft);
+            font-size: 13px;
+        }
+
+        .comment p {
+            font-size: 14px;
+            margin-top: 3px;
+        }
+
+        .comment-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 6px;
+        }
+
+        .comment-form {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
+        .comment-form input {
+            flex: 1;
+            background: var(--bg);
+            border: 1px solid #262626;
+            color: var(--text);
+            border-radius: 20px;
+            padding: 9px 14px;
+            font-family: inherit;
+            font-size: 13px;
+        }
+
+        .comment-form input:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            background: var(--card);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .gallery-item .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent 60%);
+            display: flex;
+            align-items: flex-end;
+            padding: 8px;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        .gallery-item:hover .overlay {
+            opacity: 1;
+        }
+
+        .gallery-item .overlay span {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gold-soft);
+        }
+
+        .gallery-item .founder-del {
+            top: 6px;
+            left: 6px;
+            padding: 4px 7px;
+            font-size: 10px;
+        }
+
+        .profile-header {
+            text-align: center;
+            margin-bottom: 26px;
+        }
+
+        .profile-cover {
+            position: relative;
+            height: 170px;
+            border-radius: 18px;
+            background: linear-gradient(140deg, rgba(232, 181, 74, 0.22), rgba(74, 163, 232, 0.16));
+            background-size: cover;
+            background-position: center;
+            border: 1px solid var(--border);
+            margin-bottom: -55px;
+            overflow: hidden;
+        }
+
+        .cover-upload {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+            background: rgba(0, 0, 0, 0.55);
+            color: var(--gold-soft);
+            border: 1px solid var(--border);
+            padding: 7px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .profile-avatar-wrap {
+            position: relative;
+            display: inline-block;
+        }
+
+        .profile-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--gold);
+            box-shadow: 0 0 26px var(--gold-glow);
+            background: var(--card);
+        }
+
+        .avatar-upload {
+            position: absolute;
+            bottom: 4px;
+            left: 4px;
+            background: var(--gold);
+            color: #000;
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+        }
+
+        .profile-name {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--gold);
+            margin-top: 12px;
+        }
+
+        .profile-user {
+            color: var(--blue);
+            font-size: 15px;
+        }
+
+        .profile-bio {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 8px;
+            max-width: 460px;
+            margin-inline: auto;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 28px;
+            margin: 20px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat b {
+            display: block;
+            font-size: 22px;
+            color: var(--gold);
+            font-weight: 800;
+        }
+
+        .stat span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .donate-card {
+            background: linear-gradient(140deg, rgba(232, 181, 74, 0.12), rgba(74, 163, 232, 0.08));
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 22px;
+            margin-top: 22px;
+            text-align: center;
+        }
+
+        .donate-card h3 {
+            color: var(--gold);
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .donate-card p {
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 14px;
+        }
+
+        .donate-account {
+            background: var(--bg);
+            border: 1px dashed var(--gold);
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 17px;
+            color: var(--gold-soft);
+            font-weight: 800;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            direction: ltr;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        .pg-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 22px 0 14px;
+            color: var(--gold);
+            font-weight: 800;
+            font-size: 14px;
+        }
+
+        .pg-divider span {
+            border-top: 1px solid var(--border);
+            width: 100%;
+            text-align: center;
+            padding-top: 14px;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 6px;
+        }
+
+        .pg-cell {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            background: var(--card);
+            border: 1px solid var(--border);
+        }
+
+        .pg-cell img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.35s;
+        }
+
+        .pg-cell:hover img {
+            transform: scale(1.07);
+        }
+
+        .pg-cell.pg-text {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            text-align: center;
+            background: var(--card-2);
+        }
+
+        .pg-ico {
+            font-size: 26px;
+            margin-bottom: 6px;
+        }
+
+        .pg-ttl {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gold-soft);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .pg-badge {
+            position: absolute;
+            bottom: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.65);
+            color: var(--gold-soft);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 7px;
+            border-radius: 20px;
+        }
+
+        .about-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 24px;
+            margin-bottom: 18px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-card h3 {
+            color: var(--gold);
+            font-size: 18px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .about-card p {
+            color: var(--text);
+            font-size: 15px;
+            margin-bottom: 12px;
+        }
+
+        .about-card .muted {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        .about-feature {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            margin-bottom: 14px;
+        }
+
+        .about-feature .af-ic {
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .about-feature b {
+            color: var(--gold-soft);
+            display: block;
+            font-size: 15px;
+            margin-bottom: 2px;
+        }
+
+        .about-feature span {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .nav-mobile {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 90;
+            background: rgba(10, 10, 10, 0.97);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid var(--border);
+            padding: 8px 6px calc(8px + env(safe-area-inset-bottom));
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .nav-mobile button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            color: var(--muted);
+            font-family: inherit;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            transition: color 0.2s;
+            flex: 1;
+        }
+
+        .nav-mobile button .ic {
+            font-size: 22px;
+        }
+
+        .nav-mobile button.active {
+            color: var(--gold);
+        }
+
+        .nav-mobile .mini-avatar {
+            width: 26px;
+            height: 26px;
+        }
+
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            background: rgba(0, 0, 0, 0.78);
+            backdrop-filter: blur(6px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            animation: fade 0.3s;
+        }
+
+        .modal {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            width: 100%;
+            max-width: 460px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 26px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .modal h3 {
+            color: var(--gold);
+            font-size: 20px;
+            margin-bottom: 6px;
+            text-align: center;
+        }
+
+        .modal .sub {
+            color: var(--muted);
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .modal label {
+            display: block;
+            font-size: 13px;
+            color: var(--gold-soft);
+            margin: 12px 0 6px;
+            font-weight: 700;
+        }
+
+        .modal input,
+        .modal textarea {
+            width: 100%;
+            background: var(--bg);
+            border: 1px solid #262626;
+            color: var(--text);
+            border-radius: 12px;
+            padding: 11px 14px;
+            font-family: inherit;
+            font-size: 14px;
+        }
+
+        .modal input:focus,
+        .modal textarea:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: none;
+            border: none;
+            color: var(--muted);
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .charter {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px;
+            font-size: 13px;
+            color: var(--muted);
+            max-height: 180px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+            line-height: 1.8;
+        }
+
+        .charter b {
+            color: var(--gold);
+        }
+
+        .charter .ban {
+            color: var(--red);
+            font-weight: 700;
+        }
+
+        .charter-check {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .charter-check input {
+            width: auto;
+            margin-top: 4px;
+        }
+
+        .editor-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            background: var(--bg);
+            border: 1px solid #262626;
+            border-radius: 12px 12px 0 0;
+            padding: 8px;
+            border-bottom: none;
+        }
+
+        .editor-toolbar button,
+        .editor-toolbar select,
+        .editor-toolbar input[type="color"] {
+            background: var(--card-2);
+            border: 1px solid #2a2a2a;
+            color: var(--text);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: inherit;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 6px 9px;
+            min-width: 34px;
+        }
+
+        .editor-toolbar input[type="color"] {
+            padding: 2px;
+            width: 36px;
+            height: 32px;
+        }
+
+        .editor-toolbar button:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .editor-area {
+            min-height: 200px;
+            background: var(--bg);
+            border: 1px solid #262626;
+            border-radius: 0 0 12px 12px;
+            padding: 14px;
+            color: var(--text);
+            font-size: 15px;
+            overflow-y: auto;
+            max-height: 320px;
+        }
+
+        .editor-area:focus {
+            outline: none;
+            border-color: var(--gold);
+        }
+
+        .editor-area:empty:before {
+            content: attr(data-ph);
+            color: var(--muted);
+        }
+
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 250;
+            background: rgba(0, 0, 0, 0.92);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .lightbox.show {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 90px;
+            left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--gold);
+            color: #000;
+            font-weight: 800;
+            font-size: 14px;
+            padding: 12px 22px;
+            border-radius: 30px;
+            z-index: 300;
+            opacity: 0;
+            transition: all 0.3s;
+            pointer-events: none;
+            box-shadow: var(--shadow);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .empty-state {
+            text-align: center;
+            color: var(--muted);
+            padding: 40px 16px;
+            font-size: 15px;
+        }
+
+        .empty-state .big {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .founder-banner {
+            background: linear-gradient(135deg, rgba(232, 181, 74, 0.2), rgba(232, 72, 74, 0.12));
+            border: 1px solid var(--gold);
+            border-radius: 14px;
+            padding: 12px 16px;
+            margin-bottom: 18px;
+            text-align: center;
+            color: var(--gold-soft);
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .feed-filters {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .feed-filter-btn {
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            font-family: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .feed-filter-btn:hover,
+        .feed-filter-btn.active {
+            color: var(--gold);
+            background: rgba(232, 181, 74, 0.12);
+            border-color: var(--gold);
+        }
+
+        .type-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(232, 181, 74, 0.12);
+            color: var(--gold-soft);
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        .art-feed-preview {
+            width: 100%;
+            max-height: 320px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .trending-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+            color: #000;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 5px 10px;
+            border-radius: 20px;
+            z-index: 4;
+        }
+
+        .badge-founder {
+            background: var(--gold);
+            color: #000;
+            padding: 4px 14px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        @media (max-width: 720px) {
+            .nav-desktop {
+                display: none;
+            }
+
+            .topbar .auth-area .btn-gold span.lbl {
+                display: none;
+            }
+
+            .nav-mobile {
+                display: flex;
+            }
+
+            .brand h1 {
+                font-size: 15px;
+            }
+
+            .brand small {
+                display: none;
+            }
+
+            .gallery-grid {
+                gap: 4px;
+            }
+
+            .container {
+                padding: 18px 12px 110px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="topbar">
+        <div class="topbar-inner">
+            <div class="brand" onclick="switchTab('feed')">
+                <span class="sun">☀️</span>
+                <div>
+                    <h1>منصة أشرقت للفكر الحر</h1>
+                    <small>لنشر الفن والأطروحات</small>
+                </div>
+            </div>
+
+            <nav class="nav-desktop" id="navDesktop">
+                <button class="nav-btn active" data-tab="feed" onclick="switchTab('feed')"><span class="ic">🏠</span>
+                    الرئيسية</button>
+                <button class="nav-btn" data-tab="books" onclick="switchTab('books')"><span class="ic">📚</span> الكتب
+                    والروايات</button>
+                <button class="nav-btn" data-tab="art" onclick="switchTab('art')"><span class="ic">🎨</span> منصة
+                    الرسامين</button>
+                <button class="nav-btn" data-tab="about" onclick="switchTab('about')"><span class="ic">ℹ️</span> عن
+                    المنصة</button>
+                <button class="nav-btn" data-tab="profile" onclick="goMyProfile()"><span class="ic">👤</span>
+                    حسابي</button>
+            </nav>
+
+            <div class="auth-area" id="authArea"></div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <div id="founderBanner" class="founder-banner" style="display:none">
+            وضع الرقابة والسيطرة العليا للمؤسس أشرقت ☀️ — لديكِ صلاحية الحذف الرقابي المطلق على كل المحتوى.
+        </div>
+
+        <section class="tab-section active" id="tab-feed">
+            <div class="section-head">
+                <h2>الصفحة الرئيسية</h2>
+                <p>كلّ ما يُنشر على المنصّة — أطروحات، كتب، وفن — يظهر هنا للجميع</p>
+            </div>
+            <div class="feed-filters">
+                <button class="feed-filter-btn" data-sort="trending" onclick="setFeedSort('trending')">🔥 الأكثر
+                    إعجاباً</button>
+                <button class="feed-filter-btn active" data-sort="newest" onclick="setFeedSort('newest')">🆕
+                    الأحدث</button>
+                <button class="feed-filter-btn" data-sort="following" onclick="setFeedSort('following')">👥 من
+                    أتابعهم</button>
+                <button class="feed-filter-btn" data-sort="all" onclick="setFeedSort('all')">📋 الكل</button>
+            </div>
+            <div class="composer" id="feedComposer"></div>
+            <div id="feedList"></div>
+        </section>
+
+        <section class="tab-section" id="tab-books">
+            <div class="section-head">
+                <h2>الكتب والروايات</h2>
+                <p>خزانة المخطوطات والأعمال الأدبية المطوّلة</p>
+            </div>
+            <div class="composer" id="booksComposer"></div>
+            <div id="booksList"></div>
+        </section>
+
+        <section class="tab-section" id="tab-art">
+            <div class="section-head">
+                <h2>منصة الرسامين لدعم الفن</h2>
+                <p>معرضٌ يحتفي بإبداع الرسامين ولوحاتهم</p>
+            </div>
+            <div class="composer" id="artComposer"></div>
+            <div class="gallery-grid" id="artGrid"></div>
+        </section>
+
+        <section class="tab-section" id="tab-about">
+            <div class="section-head">
+                <h2>نبذة عن المنصة</h2>
+                <p>تعرّف على رسالة فضاء أشرقت للفكر الحرّ ونشر الفن</p>
+            </div>
+
+            <div class="about-card">
+                <h3>☀️ من نحن</h3>
+                <p><b style="color:var(--gold-soft)">منصة أشرقت للفكر الحر ونشر الفن</b> فضاءٌ رقميّ حُرّ أسّسته <b
+                        style="color:var(--gold-soft)">أشرقت عادل حسن</b>، يجمع المفكّرين والأدباء والرسّامين تحت سقفٍ
+                    واحد يحتفي بالكلمة الراقية والإبداع الأصيل.</p>
+                <p class="muted">نؤمن أنّ الفكر الحرّ مسؤوليةٌ قبل أن يكون حقّاً, وأنّ الفنّ لغةٌ تتجاوز الحدود. هنا
+                    تُنشر الأطروحات الفكرية، وتُودَع الكتب والروايات، وتُعرض اللوحات الفنية — في بيئةٍ راقية تصون كرامة
+                    الإنسان وقدسية الكلمة.</p>
+            </div>
+
+            <div class="about-card">
+                <h3>🌿 ما الذي نقدّمه</h3>
+                <div class="about-feature"><span class="af-ic">✍️</span>
+                    <div><b>الأطروحات الفكرية</b><span>مقالات وأبحاث وتحليلات فلسفية ونقدية بمحرّرٍ نصّي متقدّم.</span>
+                    </div>
+                </div>
+                <div class="about-feature"><span class="af-ic">📚</span>
+                    <div><b>الكتب والروايات</b><span>خزانةٌ للأعمال الأدبية المطوّلة والمخطوطات.</span></div>
+                </div>
+                <div class="about-feature"><span class="af-ic">🎨</span>
+                    <div><b>منصة الرسامين</b><span>معرضٌ يحتفي بإبداع الرسامين ولوحاتهم.</span></div>
+                </div>
+                <div class="about-feature"><span class="af-ic">🤝</span>
+                    <div><b>مجتمع المفكّرين</b><span>تفاعل، تعليقات، وإعجابات تُثري الحوار وتدعم المبدعين.</span></div>
+                </div>
+            </div>
+
+            <div class="about-card">
+                <h3>⚖️ ميثاقنا الإنساني</h3>
+                <p class="muted">يُمنع منعاً باتّاً الإساءة الجارحة أو خطابات الكراهية ضدّ أيّ دينٍ أو طائفةٍ أو عرق.
+                    نحن فضاءٌ للبناء لا الهدم، وللاحترام لا التجريح.</p>
+            </div>
+
+            <div class="donate-card">
+                <h3>💛 ادعم المنصّة</h3>
+                <p>استمرارية هذا الفضاء وتطويره أمانةٌ في أعناقنا جميعاً. تبرّعك بذرةٌ في حقل الإبداع الحرّ.</p>
+                <div class="donate-account">
+                    <span>6111022411</span>
+                    <button class="copy-btn" onclick="copyAccount()" title="نسخ">📋</button>
+                </div>
+                <p style="margin-top:10px;font-size:12px;color:var(--muted)">رقم حساب الدعم الرسمي للمنصّة</p>
+            </div>
+        </section>
+
+        <section class="tab-section" id="tab-profile">
+            <div id="profileContent"></div>
+        </section>
+
+    </main>
+
+    <nav class="nav-mobile" id="navMobile">
+        <button class="active" data-tab="feed" onclick="switchTab('feed')"><span class="ic">🏠</span> الرئيسية</button>
+        <button data-tab="books" onclick="switchTab('books')"><span class="ic">📚</span> الكتب</button>
+        <button data-tab="art" onclick="switchTab('art')"><span class="ic">🎨</span> الفن</button>
+        <button data-tab="about" onclick="switchTab('about')"><span class="ic">ℹ️</span> المنصة</button>
+        <button data-tab="profile" onclick="goMyProfile()"><span class="ic">👤</span> حسابي</button>
+    </nav>
+
+    <!-- نافذة تسجيل الدخول الذكي -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal" style="position:relative">
+            <button class="modal-close" onclick="closeModal('loginModal')">✕</button>
+            <h3>🔐 تسجيل الدخول</h3>
+            <p class="sub">استخدم إيميلك وكلمة المرور — يعيد لك حسابك القديم تلقائياً</p>
+
+            <div style="font-weight:800;color:var(--gold);margin-bottom:8px;text-align:center">⚖️ الميثاق الإنساني
+                للفضاء</div>
+            <div class="charter">
+                <b>دستور وشروط منصة أشرقت للفكر الحر:</b><br />
+                هذا الفضاء وقفٌ للفكر الحرّ والإبداع الراقي تحت رعاية المؤسِّسة <b>أشرقت عادل حسن</b>.<br /><br />
+                <span class="ban">يُمنع منعاً باتاً:</span> الإساءة الجارحة، أو بثّ خطابات الكراهية والتحقير ضدّ أيّ
+                دينٍ، أو طائفةٍ، أو عرقٍ بشريّ.<br /><br />
+                تحتفظ الإدارة بـ<b>الحقّ المطلق</b> في حذف أيّ منشورٍ مخالف وحظر الحساب المسيء دون إنذار، حفاظاً على
+                كرامة الإنسان وقدسية الكلمة.
+            </div>
+
+            <label class="charter-check">
+                <input type="checkbox" id="agreeCharter" />
+                <span>أقرّ بأنّي قرأتُ الميثاق الإنساني وأوافق على الالتزام التامّ ببنوده.</span>
+            </label>
+
+            <label>📧 البريد الإلكتروني</label>
+            <input type="email" id="loginEmail" placeholder="example@email.com" />
+
+            <label>🔑 كلمة المرور</label>
+            <input type="password" id="loginPassword" placeholder="أدخل كلمة مرور قوية" />
+
+            <label>👤 الاسم الفكري (يظهر للعلن)</label>
+            <input type="text" id="loginName" placeholder="مثال: غسان الفيلسوف" />
+
+            <label>@ اسم المستخدم (فريد)</label>
+            <input type="text" id="loginUser" placeholder="مثال: ghassan_ideas" />
+
+            <label>📝 نبذة تعريفية موجزة</label>
+            <textarea id="loginBio" rows="2" placeholder="باحثٌ في الفلسفة الوجودية..."></textarea>
+
+            <button class="btn btn-gold" style="width:100%;margin-top:18px" onclick="doLogin()">
+                🔐 دخول / إنشاء حساب
+            </button>
+            <p style="text-align:center;color:var(--muted);font-size:11px;margin-top:10px">
+                إذا كان الإيميل مسجلاً مسبقاً → سيتم استعادة حسابك القديم تلقائياً
+            </p>
+        </div>
+    </div>
+
+    <!-- نافذة المحرر المتقدم -->
+    <div class="modal-overlay" id="editorModal">
+        <div class="modal" style="position:relative;max-width:560px">
+            <button class="modal-close" onclick="closeModal('editorModal')">✕</button>
+            <h3 id="editorTitle">المحرّر المتقدّم</h3>
+            <p class="sub">تحكّم بحجم الخط، ولوّن نصوصك، وأدرج الروابط بتنسيقٍ أنيق</p>
+
+            <label>عنوان العمل</label>
+            <input type="text" id="editorPostTitle" placeholder="عنوان الأطروحة أو الكتاب..." />
+
+            <label>المتن</label>
+            <div class="editor-toolbar">
+                <button type="button" onmousedown="event.preventDefault()" onclick="exec('bold')"
+                    style="font-weight:900">B</button>
+                <button type="button" onmousedown="event.preventDefault()" onclick="exec('italic')"
+                    style="font-style:italic">I</button>
+                <button type="button" onmousedown="event.preventDefault()" onclick="exec('underline')"
+                    style="text-decoration:underline">U</button>
+                <select onmousedown="event.stopPropagation()" onchange="exec('fontSize', this.value)" title="حجم الخط">
+                    <option value="">الحجم</option>
+                    <option value="2">صغير</option>
+                    <option value="3">عادي</option>
+                    <option value="5">كبير</option>
+                    <option value="7">ضخم</option>
+                </select>
+                <input type="color" value="#e8b54a" onchange="exec('foreColor', this.value)" title="لون النص" />
+                <button type="button" onmousedown="event.preventDefault()" onclick="insertLink()" title="إدراج رابط">🔗
+                    رابط</button>
+                <button type="button" onmousedown="event.preventDefault()" onclick="exec('justifyRight')"
+                    title="محاذاة لليمين">⇥</button>
+                <button type="button" onmousedown="event.preventDefault()" onclick="exec('justifyCenter')"
+                    title="توسيط">≡</button>
+                <button type="button" onmousedown="event.preventDefault()" onclick="exec('insertUnorderedList')"
+                    title="قائمة">• قائمة</button>
+            </div>
+            <div class="editor-area" id="editorArea" contenteditable="true" data-ph="اكتب نصّك الراقي هنا..."></div>
+
+            <button class="btn btn-gold" style="width:100%;margin-top:18px" onclick="saveEditor()">💾 حفظ ونشر</button>
+        </div>
+    </div>
+
+    <!-- نافذة تعديل الملف الشخصي -->
+    <div class="modal-overlay" id="editProfileModal">
+        <div class="modal" style="position:relative">
+            <button class="modal-close" onclick="closeModal('editProfileModal')">✕</button>
+            <h3>تعديل الملف الشخصي</h3>
+            <p class="sub">حدّث اسمك ونبذتك التعريفية</p>
+            <label>الاسم الفكري</label>
+            <input type="text" id="epName" placeholder="اسمك كما يظهر للعلن" />
+            <label>النبذة التعريفية (تدعم الروابط)</label>
+            <textarea id="epBio" rows="4"
+                placeholder="عرّف بنفسك... يمكنك لصف روابطك مثل https://instagram.com/yourname وستتحوّل تلقائياً لروابط قابلة للنقر."></textarea>
+            <p style="color:var(--muted);font-size:11px;margin-top:6px">💡 أي رابط تكتبه (https://... أو www.) سيصبح
+                قابلاً للنقر في ملفك.</p>
+            <button class="btn btn-gold" style="width:100%;margin-top:18px" onclick="saveProfile()">💾 حفظ
+                التغييرات</button>
+        </div>
+    </div>
+
+    <!-- عارض اللوحات -->
+    <div class="lightbox" id="lightbox" onclick="this.classList.remove('show')">
+        <img id="lightboxImg" src="" alt="لوحة فنية" />
+    </div>
+
+    <!-- إشعار -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        // =====================================================================
+        // منصة أشرقت للفكر الحر ونشر الفن - النسخة الكاملة
+        // =====================================================================
+
+        const FOUNDER_USERNAME = 'ashraqat';
+        const DONATION_ACCOUNT = '6111022411';
+
+        // ============ إدارة الحالة والتخزين ============
+        const Store = {
+            get(key, def) {
+                try { return JSON.parse(localStorage.getItem('ashraqat_' + key)) ?? def; } catch { return def; }
+            },
+            set(key, val) { localStorage.setItem('ashraqat_' + key, JSON.stringify(val)); }
+        };
+
+        let currentUser = Store.get('currentUser', null);
+        let posts = Store.get('posts', []);
+        let books = Store.get('books', []);
+        let artworks = Store.get('artworks', []);
+        let members = Store.get('members', []);
+        let currentTab = 'feed';
+        let feedSort = 'newest';
+        let editorContext = null;
+        let viewedUser = null;
+
+        // ============ أدوات مساعدة ============
+        function id() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+
+        function now() {
+            return new Date().toLocaleDateString('ar-EG', { year: 'numeric', month: 'long', day: 'numeric' });
+        }
+
+        function avatarFor(letter) {
+            const svg =
+                `<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' fill='%23121212'/><text x='50%' y='54%' font-size='60' fill='%23e8b54a' text-anchor='middle' dominant-baseline='middle' font-family='serif'>${letter}</text></svg>`;
+            return 'data:image/svg+xml;utf8,' + svg.replace(/#/g, '%23').replace('%23121212', '%23121212');
+        }
+
+        function isFounder() { return currentUser && currentUser.username === FOUNDER_USERNAME; }
+
+        function esc(s) { return (s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+        function linkify(s) {
+            let t = esc(s);
+            t = t.replace(/(https?:\/\/[^\s<]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+            t = t.replace(/(^|\s)(www\.[^\s<]+)/g, '$1<a href="https://$2" target="_blank" rel="noopener">$2</a>');
+            return t.replace(/\n/g, '<br/>');
+        }
+
+        function toast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(window._tt);
+            window._tt = setTimeout(() => t.classList.remove('show'), 2200);
+        }
+
+        function persist() {
+            Store.set('posts', posts);
+            Store.set('books', books);
+            Store.set('artworks', artworks);
+            Store.set('members', members);
+            if (currentUser) Store.set('currentUser', currentUser);
+        }
+
+        function itemTimestamp(item) {
+            if (item.createdAt) return new Date(item.createdAt).getTime();
+            const parsed = parseInt(String(item.id), 36);
+            return Number.isFinite(parsed) ? parsed : 0;
+        }
+
+        function setFeedSort(sort) {
+            feedSort = sort;
+            document.querySelectorAll('.feed-filter-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.sort === sort);
+            });
+            renderFeed();
+        }
+
+        // ============ دالة جلب المحتوى العام - تم إصلاحها بالكامل ============
+        function getAllPublicContent() {
+            // 1. جمع كل المحتوى من جميع الأقسام (أطروحات، كتب، فن)
+            let items = [
+                ...posts.map(p => ({ ...p, _type: 'feed', _label: '✍️ أطروحة' })),
+                ...books.map(p => ({ ...p, _type: 'books', _label: '📚 كتاب' })),
+                ...artworks.map(a => ({ ...a, _type: 'art', _label: '🎨 فن' }))
+            ];
+
+            // 2. خيار "من أتابعهم": نُظهر كل المنشورات للجميع دائماً
+            // (بدون فلترة الاختفاء) لكن نرتّب بحيث منشورات المتابعين تظهر بالأعلى.
+            if (feedSort === 'following') {
+                let followingList = [];
+                if (currentUser && Array.isArray(currentUser.following)) {
+                    followingList = currentUser.following;
+                }
+
+                return items.sort((a, b) => {
+                    const aIsFollowing = followingList.includes(a.authorUser) ? 1 : 0;
+                    const bIsFollowing = followingList.includes(b.authorUser) ? 1 : 0;
+                    if (aIsFollowing !== bIsFollowing) return bIsFollowing - aIsFollowing;
+                    return itemTimestamp(b) - itemTimestamp(a);
+                });
+            }
+
+            // 3. ترتيب حسب الأحدث (الافتراضي ولجميع الخيارات الأخرى)
+            // نطبق الترتيب حسب الطلب المختار
+            if (feedSort === 'trending') {
+                // نرتب تنازلياً حسب عدد الإعجابات، وفي حال التساوي نرجع للأحدث
+                return items.sort((a, b) => {
+                    const likesDiff = (b.likes || 0) - (a.likes || 0);
+                    if (likesDiff !== 0) return likesDiff;
+                    return itemTimestamp(b) - itemTimestamp(a);
+                });
+            }
+
+            // بالنسبة لـ 'newest' أو 'all' أو أي قيمة أخرى
+            // 🔥 نرتب فقط حسب الأحدث (كل المحتوى يظهر)
+            return items.sort((a, b) => itemTimestamp(b) - itemTimestamp(a));
+        }
+
+        // ============ التنقّل ============
+        function switchTab(tab) {
+            currentTab = tab;
+            document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+            const targetSec = document.getElementById('tab-' + tab);
+            if (targetSec) targetSec.classList.add('active');
+
+            document.querySelectorAll('#navDesktop .nav-btn, #navMobile button').forEach(b => {
+                b.classList.toggle('active', b.dataset.tab === tab);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (tab === 'feed') renderFeed();
+            if (tab === 'profile') renderProfile();
+            if (tab === 'books') renderBooks();
+            if (tab === 'art') renderArt();
+        }
+
+        function goMyProfile() {
+            viewedUser = null;
+            switchTab('profile');
+        }
+
+        function openModal(idd) { document.getElementById(idd).classList.add('show'); }
+
+        function closeModal(idd) { document.getElementById(idd).classList.remove('show'); }
+
+        // ============ تسجيل الدخول الذكي ============
+        function requireLogin() {
+            if (!currentUser) { openModal('loginModal'); return false; }
+            return true;
+        }
+
+        function doLogin() {
+            const agree = document.getElementById('agreeCharter').checked;
+            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            const password = document.getElementById('loginPassword').value.trim();
+            const name = document.getElementById('loginName').value.trim();
+            const user = document.getElementById('loginUser').value.trim().replace(/^@/, '');
+            const bio = document.getElementById('loginBio').value.trim();
+
+            if (!agree) { toast('يجب الموافقة على الميثاق الإنساني أولاً ⚖️'); return; }
+            if (!email || !email.includes('@')) { toast('يرجى إدخال بريد إلكتروني صحيح 📧'); return; }
+            if (!password || password.length < 4) { toast('كلمة المرور يجب أن تكون 4 أحرف على الأقل 🔑'); return; }
+            if (!name) { toast('يرجى إدخال الاسم الفكري'); return; }
+            if (!user) { toast('يرجى إدخال اسم المستخدم'); return; }
+            if (!/^[a-zA-Z0-9_.]+$/.test(user)) { toast('اسم المستخدم بالإنجليزية والأرقام فقط'); return; }
+
+            // البحث عن مستخدم مسجل بنفس البريد الإلكتروني
+            let existingByEmail = members.find(m => m.email === email);
+
+            if (existingByEmail) {
+                // استعادة الحساب القديم - التحقق من كلمة المرور
+                if (existingByEmail.password !== password) {
+                    toast('كلمة المرور غير صحيحة! 🔑');
+                    return;
+                }
+                // تحديث البيانات المدخلة إن لزم الأمر
+                if (name) existingByEmail.name = name;
+                if (bio) existingByEmail.bio = bio;
+                currentUser = existingByEmail;
+                toast('تم استعادة حسابك القديم! أهلاً بعودتك 👋');
+            } else {
+                // إنشاء حساب جديد - التحقق من عدم تكرار اسم المستخدم
+                let existingByUsername = members.find(m => m.username === user);
+                if (existingByUsername) {
+                    toast('اسم المستخدم هذا محجوز مسبقاً! اختر اسماً آخر ⚠️');
+                    return;
+                }
+
+                currentUser = {
+                    name,
+                    username: user,
+                    email: email,
+                    password: password,
+                    bio: bio || 'عضوٌ في فضاء الفكر الحر.',
+                    avatar: avatarFor(name[0] || '؟'),
+                    likes: 0,
+                    followers: [],
+                    following: []
+                };
+                members.push(currentUser);
+                toast('تم إنشاء حسابك الجديد! أهلاً بك في منصة أشرقت ☀️');
+            }
+
+            persist();
+            closeModal('loginModal');
+            renderAll();
+
+            if (isFounder()) {
+                toast('أهلاً بكِ أيتها المؤسِّسة أشرقت ☀️ — تمّ تفعيل وضع الرقابة العليا');
+            }
+        }
+
+        function logout() {
+            currentUser = null;
+            localStorage.removeItem('ashraqat_currentUser');
+            renderAll();
+            toast('تمّ تسجيل الخروج');
+        }
+
+        // ============ شريط الهوية ============
+        function renderAuthArea() {
+            const el = document.getElementById('authArea');
+            const banner = document.getElementById('founderBanner');
+            if (currentUser) {
+                el.innerHTML = `
+                    <img class="mini-avatar" src="${currentUser.avatar}" alt="حسابي" onclick="switchTab('profile')" title="${esc(currentUser.name)}" />
+                    <button class="btn btn-ghost" style="padding:5px 12px;font-size:12px" onclick="logout()">🚪</button>
+                `;
+                banner.style.display = isFounder() ? 'block' : 'none';
+            } else {
+                el.innerHTML =
+                    `<button class="btn btn-gold" onclick="openModal('loginModal')">🔐 دخول</button>`;
+                banner.style.display = 'none';
+            }
+        }
+
+        // ============ صناديق النشر ============
+        function renderComposers() {
+            const feedC = document.getElementById('feedComposer');
+            const booksC = document.getElementById('booksComposer');
+            const artC = document.getElementById('artComposer');
+
+            if (currentUser) {
+                feedC.innerHTML = `
+                    <div class="composer-row" style="margin-bottom:10px">
+                        <div style="display:flex;align-items:center;gap:10px">
+                            <img class="mini-avatar" src="${currentUser.avatar}" alt="" />
+                            <b style="color:var(--gold-soft)">شارك إبداعك مع الجميع يا ${esc(currentUser.name)}</b>
+                        </div>
+                    </div>
+                    <div style="display:flex;gap:8px;flex-wrap:wrap">
+                        <button class="btn btn-gold" onclick="openEditor('feed')">✍️ أطروحة</button>
+                        <button class="btn btn-gold" onclick="openEditor('books')">📚 كتاب</button>
+                        <button class="btn btn-ghost" onclick="switchTab('art')">🎨 لوحة فنية</button>
+                    </div>`;
+                booksC.innerHTML = `<button class="btn btn-gold" onclick="openEditor('books')">📚 إيداع كتاب أو رواية</button>`;
+                artC.innerHTML = `
+                    <b style="color:var(--gold-soft);display:block;margin-bottom:10px">🎨 ارفع لوحتك الفنية</b>
+                    <input type="text" id="artTitle" placeholder="عنوان اللوحة" />
+                    <div class="composer-row">
+                        <input type="file" id="artFile" accept="image/*" style="color:var(--muted);font-size:13px;max-width:70%" />
+                        <button class="btn btn-gold" onclick="addArtwork()">عرض اللوحة</button>
+                    </div>
+                `;
+            } else {
+                const lock =
+                    `<div style="text-align:center;color:var(--muted)">🔒 سجّل دخولك للمشاركة <button class="btn btn-ghost" style="margin-top:8px" onclick="openModal('loginModal')">دخول</button></div>`;
+                feedC.innerHTML = lock;
+                booksC.innerHTML = lock;
+                artC.innerHTML = lock;
+            }
+        }
+
+        // ============ المحرّر ============
+        function exec(cmd, val) {
+            document.execCommand(cmd, false, val || null);
+            document.getElementById('editorArea').focus();
+        }
+
+        function insertLink() {
+            const url = prompt('أدخل الرابط (مثال: https://example.com):');
+            if (url) {
+                const txt = window.getSelection().toString() || url;
+                document.execCommand('insertHTML', false,
+                    `<a href="${url}" target="_blank" rel="noopener" style="color:#4aa3e8">${esc(txt)}</a>`);
+            }
+        }
+
+        function openEditor(type, editId) {
+            if (!requireLogin()) return;
+            editorContext = { type, editId: editId || null };
+            document.getElementById('editorTitle').textContent =
+                type === 'books' ? 'محرّر الكتب والروايات' : 'محرّر الأطروحات الفكرية';
+
+            const area = document.getElementById('editorArea');
+            const titleInp = document.getElementById('editorPostTitle');
+
+            if (editId) {
+                const list = type === 'books' ? books : posts;
+                const item = list.find(p => p.id === editId);
+                titleInp.value = item.title || '';
+                area.innerHTML = item.body || '';
+            } else {
+                titleInp.value = '';
+                area.innerHTML = '';
+            }
+            openModal('editorModal');
+        }
+
+        function saveEditor() {
+            const { type, editId } = editorContext;
+            const title = document.getElementById('editorPostTitle').value.trim();
+            const body = document.getElementById('editorArea').innerHTML.trim();
+            if (!title || !body || body === '<br>') { toast('يرجى كتابة العنوان والمتن'); return; }
+
+            const list = type === 'books' ? books : posts;
+
+            if (editId) {
+                const item = list.find(p => p.id === editId);
+                item.title = title;
+                item.body = body;
+                item.edited = true;
+                toast('تمّ تحديث العمل بنجاح ✨');
+            } else {
+                const item = {
+                    id: id(),
+                    authorName: currentUser.name,
+                    authorUser: currentUser.username,
+                    authorAvatar: currentUser.avatar,
+                    title,
+                    body,
+
+                    // إجبار المنشور على أن يكون عاماً ومنشوراً فوراً
+                    status: 'published',
+                    visibility: 'public',
+
+                    date: now(),
+                    createdAt: new Date().toISOString(),
+                    likes: 0,
+                    likedBy: [],
+                    comments: []
+                };
+                list.unshift(item);
+                toast(type === 'books' ? 'تمّ إيداع كتابك في الخزانة 📚' : 'تمّ نشر أطروحتك ✍️');
+            }
+
+            persist();
+            closeModal('editorModal');
+            renderFeed();
+            renderBooks();
+        }
+
+        function typeLabel(type) {
+            if (type === 'books') return '📚 كتاب';
+            if (type === 'art') return '🎨 فن';
+            return '✍️ أطروحة';
+        }
+
+        // ============ معرض الرسامين ============
+        function addArtwork() {
+            if (!requireLogin()) return;
+            const title = document.getElementById('artTitle').value.trim();
+            const file = document.getElementById('artFile').files[0];
+            if (!title) { toast('يرجى إدخال عنوان اللوحة'); return; }
+            if (!file) { toast('يرجى اختيار صورة من جهازك'); return; }
+
+            const reader = new FileReader();
+            reader.onload = e => {
+                const item = {
+                    id: id(),
+                    title,
+                    src: e.target.result,
+                    authorName: currentUser.name,
+                    authorUser: currentUser.username,
+                    authorAvatar: currentUser.avatar,
+                    date: now(),
+                    createdAt: new Date().toISOString(),
+                    likes: 0,
+                    likedBy: [],
+                    comments: []
+                };
+                artworks.unshift(item);
+                persist();
+                renderArt();
+                renderFeed();
+                document.getElementById('artTitle').value = '';
+                document.getElementById('artFile').value = '';
+                toast('تمّ عرض لوحتك في المعرض 🎨');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function renderArt() {
+            const grid = document.getElementById('artGrid');
+            if (!artworks.length) {
+                grid.innerHTML =
+                    `<div class="empty-state" style="grid-column:1/-1"><span class="big">🎨</span>لا توجد لوحاتٌ بعد. كن أول الرسامين الذين يُضيئون هذا المعرض.</div>`;
+                return;
+            }
+            grid.innerHTML = artworks.map(a => {
+                const liked = currentUser && a.likedBy && a.likedBy.includes(currentUser.username);
+                const fBtn = isFounder() ?
+                    `<button class="founder-del" onclick="event.stopPropagation();founderDelete('art','${a.id}')">حذف 👤❌</button>` :
+                    '';
+                return `
+                    <div class="gallery-item" onclick="openArt('${a.id}')">
+                        ${fBtn}
+                        <img src="${a.src}" alt="${esc(a.title)}" loading="lazy" onerror="this.src='${avatarFor('🖼')}'" />
+                        <div class="overlay"><span>${esc(a.title)} • ${liked ? '❤️' : '🤍'}${a.likes || 0}</span></div>
+                    </div>`;
+            }).join('');
+        }
+
+        function openArt(aid) {
+            const a = artworks.find(x => x.id === aid);
+            if (!a) return;
+            document.getElementById('lightboxImg').src = a.src;
+            document.getElementById('lightbox').classList.add('show');
+        }
+
+        // ============ بطاقة المنشور ============
+        function postCard(p, type) {
+            const liked = currentUser && p.likedBy && p.likedBy.includes(currentUser.username);
+            const isOwner = currentUser && p.authorUser === currentUser.username;
+            const founderBtn = isFounder() ?
+                `<button class="founder-del" onclick="founderDelete('${type}','${p.id}')">حذف رقابي للمؤسس 👤❌</button>` :
+                '';
+            const trending = feedSort === 'trending' && (p.likes || 0) >= 3 ?
+                `<span class="trending-badge">🔥 رائج</span>` : '';
+
+            return `
+                <article class="card">
+                    ${founderBtn}${trending}
+                    <span class="type-badge">${typeLabel(type)}</span>
+                    <div class="card-head" style="cursor:pointer" onclick="openProfile('${p.authorUser}')">
+                        <img src="${p.authorAvatar}" alt="" />
+                        <div class="meta">
+                            <b>${esc(p.authorName)}</b>
+                            <span>@${esc(p.authorUser)} • ${p.date}${p.edited ? ' • (مُعدّل)' : ''}</span>
+                        </div>
+                    </div>
+                    <div class="post-title">${esc(p.title)}</div>
+                    <div class="post-body">${p.body}</div>
+                    <div class="card-actions">
+                        <button class="icon-btn ${liked ? 'liked' : ''}" onclick="toggleLike('${type}','${p.id}')">
+                            <span class="heart">${liked ? '❤️' : '🤍'}</span> ${p.likes || 0}
+                        </button>
+                        <button class="icon-btn" onclick="toggleComments('${p.id}')">💬 ${(p.comments || []).length}</button>
+                        ${isOwner ? `<button class="icon-btn" onclick="openEditor('${type}','${p.id}')">✏️ تعديل</button>
+                        <button class="icon-btn" style="color:var(--red)" onclick="deleteOwnPost('${type}','${p.id}')">🗑️ حذف</button>` : ''}
+                    </div>
+                    <div class="comments" id="comments-${p.id}" style="display:none">
+                        ${renderComments(p, type)}
+                        ${currentUser ? `
+                            <form class="comment-form" onsubmit="addComment(event,'${type}','${p.id}')">
+                                <input type="text" placeholder="أضف تعليقك..." required />
+                                <button class="btn btn-ghost" type="submit">إرسال</button>
+                            </form>` : `<p style="color:var(--muted);font-size:13px">🔒 سجّل دخولك للتعليق</p>`}
+                    </div>
+                </article>`;
+        }
+
+        function artFeedCard(a) {
+            const liked = currentUser && a.likedBy && a.likedBy.includes(currentUser.username);
+            const isOwner = currentUser && a.authorUser === currentUser.username;
+            const founderBtn = isFounder() ?
+                `<button class="founder-del" onclick="founderDelete('art','${a.id}')">حذف رقابي 👤❌</button>` :
+                '';
+            const trending = feedSort === 'trending' && (a.likes || 0) >= 3 ?
+                `<span class="trending-badge">🔥 رائج</span>` : '';
+
+            return `
+                <article class="card">
+                    ${founderBtn}${trending}
+                    <span class="type-badge">${typeLabel('art')}</span>
+                    <div class="card-head" style="cursor:pointer" onclick="openProfile('${a.authorUser}')">
+                        <img src="${a.authorAvatar || avatarFor(a.authorName?.[0] || '?')}" alt="" />
+                        <div class="meta">
+                            <b>${esc(a.authorName)}</b>
+                            <span>@${esc(a.authorUser)}${a.date ? ' • ' + a.date : ''}</span>
+                        </div>
+                    </div>
+                    <div class="post-title">${esc(a.title)}</div>
+                    <img class="art-feed-preview" src="${a.src}" alt="${esc(a.title)}" loading="lazy" onclick="openArt('${a.id}')" onerror="this.src='${avatarFor('🖼')}'" />
+                    <div class="card-actions">
+                        <button class="icon-btn ${liked ? 'liked' : ''}" onclick="likeArtFromFeed('${a.id}')">
+                            <span class="heart">${liked ? '❤️' : '🤍'}</span> ${a.likes || 0}
+                        </button>
+                        <button class="icon-btn" onclick="openArt('${a.id}')">🔍 عرض</button>
+                        ${isOwner ? `<button class="icon-btn" style="color:var(--red)" onclick="deleteOwnPost('art','${a.id}')">🗑️ حذف</button>` : ''}
+                    </div>
+                </article>`;
+        }
+
+        function renderComments(p, type) {
+            if (!p.comments || !p.comments.length) return '<p style="color:var(--muted);font-size:13px">لا توجد تعليقات بعد — كن أول المتفاعلين.</p>';
+            return p.comments.map(c => {
+                const liked = currentUser && c.likedBy && c.likedBy.includes(currentUser.username);
+                const isCommentOwner = currentUser && c.user === currentUser.username;
+                const canModerate = currentUser && p.authorUser === currentUser.username;
+                const fBtn = isFounder() ?
+                    `<button class="founder-del" style="top:8px;left:8px;padding:3px 7px;font-size:10px" onclick="founderDeleteComment('${type}','${p.id}','${c.id}')">حذف 👤❌</button>` :
+                    '';
+                const ownerDel = (!isFounder() && (isCommentOwner || canModerate)) ?
+                    `<button class="icon-btn" style="color:var(--red);font-size:12px" onclick="deleteOwnComment('${type}','${p.id}','${c.id}')">🗑️ حذف</button>` :
+                    '';
+                return `
+                    <div class="comment">
+                        ${fBtn}
+                        <b>${esc(c.name)}</b> <span style="color:var(--muted);font-size:11px">@${esc(c.user)}</span>
+                        <p>${esc(c.text)}</p>
+                        <div class="comment-actions">
+                            <button class="icon-btn ${liked ? 'liked' : ''}" onclick="toggleCommentLike('${type}','${p.id}','${c.id}')">
+                                <span class="heart">${liked ? '❤️' : '🤍'}</span> ${c.likes || 0}
+                            </button>
+                            ${ownerDel}
+                        </div>
+                    </div>`;
+            }).join('');
+        }
+
+        function toggleComments(pid) {
+            const el = document.getElementById('comments-' + pid);
+            el.style.display = el.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function findItem(type, pid) {
+            const list = type === 'books' ? books : posts;
+            return { list, item: list.find(p => p.id === pid) };
+        }
+
+        function toggleLike(type, pid) {
+            if (!requireLogin()) return;
+            const { item } = findItem(type, pid);
+            item.likedBy = item.likedBy || [];
+            const i = item.likedBy.indexOf(currentUser.username);
+            if (i === -1) {
+                item.likedBy.push(currentUser.username);
+                item.likes = (item.likes || 0) + 1;
+            } else {
+                item.likedBy.splice(i, 1);
+                item.likes = Math.max(0, (item.likes || 0) - 1);
+            }
+            recalcAuthorLikes();
+            persist();
+            renderFeed();
+            renderBooks();
+        }
+
+        function likeArtFromFeed(aid) {
+            likeArt(aid);
+            renderFeed();
+        }
+
+        function likeArt(aid) {
+            if (!requireLogin()) return;
+            const a = artworks.find(x => x.id === aid);
+            a.likedBy = a.likedBy || [];
+            const i = a.likedBy.indexOf(currentUser.username);
+            if (i === -1) {
+                a.likedBy.push(currentUser.username);
+                a.likes = (a.likes || 0) + 1;
+            } else {
+                a.likedBy.splice(i, 1);
+                a.likes = Math.max(0, (a.likes || 0) - 1);
+            }
+            recalcAuthorLikes();
+            persist();
+            renderArt();
+            renderFeed();
+        }
+
+        function addComment(e, type, pid) {
+            e.preventDefault();
+            if (!requireLogin()) return;
+            const input = e.target.querySelector('input');
+            const text = input.value.trim();
+            if (!text) return;
+            const { item } = findItem(type, pid);
+            item.comments = item.comments || [];
+            item.comments.push({
+                id: id(), name: currentUser.name, user: currentUser.username, text, likes: 0,
+                likedBy: []
+            });
+            persist();
+            renderFeed();
+            renderBooks();
+            setTimeout(() => { const c = document.getElementById('comments-' + pid); if (c) c.style.display = 'block'; },
+                30);
+        }
+
+        function toggleCommentLike(type, pid, cid) {
+            if (!requireLogin()) return;
+            const { item } = findItem(type, pid);
+            const c = item.comments.find(x => x.id === cid);
+            c.likedBy = c.likedBy || [];
+            const i = c.likedBy.indexOf(currentUser.username);
+            if (i === -1) {
+                c.likedBy.push(currentUser.username);
+                c.likes = (c.likes || 0) + 1;
+            } else {
+                c.likedBy.splice(i, 1);
+                c.likes = Math.max(0, (c.likes || 0) - 1);
+            }
+            persist();
+            renderFeed();
+            renderBooks();
+            setTimeout(() => { const el = document.getElementById('comments-' + pid); if (el) el.style.display = 'block'; },
+                30);
+        }
+
+        // ============ حذف المنشورات ============
+        function deleteOwnPost(type, pid) {
+            if (!currentUser) return;
+            if (type === 'art') {
+                const a = artworks.find(x => x.id === pid);
+                if (!a || a.authorUser !== currentUser.username) return;
+                if (!confirm('هل تريد حذف هذه اللوحة نهائياً؟')) return;
+                artworks = artworks.filter(x => x.id !== pid);
+            } else {
+                const { list, item } = findItem(type, pid);
+                if (!item || item.authorUser !== currentUser.username) return;
+                if (!confirm('هل تريد حذف هذا المنشور نهائياً؟')) return;
+                const idx = list.findIndex(p => p.id === pid);
+                if (idx > -1) list.splice(idx, 1);
+            }
+            recalcAuthorLikes();
+            persist();
+            renderFeed();
+            renderBooks();
+            renderArt();
+            if (currentTab === 'profile') renderProfile();
+            toast('تمّ حذف المنشور 🗑️');
+        }
+
+        function deleteOwnComment(type, pid, cid) {
+            if (!currentUser) return;
+            const { item } = findItem(type, pid);
+            if (!item) return;
+            const c = (item.comments || []).find(x => x.id === cid);
+            if (!c) return;
+            if (c.user !== currentUser.username && item.authorUser !== currentUser.username) return;
+            if (!confirm('هل تريد حذف هذا التعليق؟')) return;
+            item.comments = item.comments.filter(x => x.id !== cid);
+            persist();
+            renderFeed();
+            renderBooks();
+            setTimeout(() => { const el = document.getElementById('comments-' + pid); if (el) el.style.display = 'block'; },
+                30);
+            toast('تمّ حذف التعليق');
+        }
+
+        // ============ صلاحيات المؤسسة ============
+        function founderDelete(type, pid) {
+            if (!isFounder()) return;
+            if (!confirm('حذفٌ رقابيّ للمؤسِّسة: هل تؤكّدين حذف هذا المحتوى المخالف نهائياً؟')) return;
+            if (type === 'art') {
+                artworks = artworks.filter(a => a.id !== pid);
+                renderArt();
+            } else {
+                const { list } = findItem(type, pid);
+                const idx = list.findIndex(p => p.id === pid);
+                if (idx > -1) list.splice(idx, 1);
+                renderFeed();
+                renderBooks();
+            }
+            recalcAuthorLikes();
+            persist();
+            toast('تمّ الحذف الرقابي للمحتوى المخالف 👤❌');
+        }
+
+        function founderDeleteComment(type, pid, cid) {
+            if (!isFounder()) return;
+            if (!confirm('حذف رقابي لهذا التعليق المخالف؟')) return;
+            const { item } = findItem(type, pid);
+            item.comments = item.comments.filter(c => c.id !== cid);
+            persist();
+            renderFeed();
+            renderBooks();
+            setTimeout(() => { const el = document.getElementById('comments-' + pid); if (el) el.style.display = 'block'; },
+                30);
+            toast('تمّ حذف التعليق المخالف');
+        }
+
+        // ============ حذف الحساب ============
+        function deleteAccount() {
+            if (!currentUser) return;
+            if (!confirm('تحذير: سيتم حذف حسابك وكل منشوراتك ولوحاتك نهائياً. هل أنت متأكد؟')) return;
+            if (!confirm('تأكيد أخير: لا يمكن التراجع عن هذا الإجراء. حذف الحساب؟')) return;
+            const u = currentUser.username;
+            posts = posts.filter(p => p.authorUser !== u);
+            books = books.filter(p => p.authorUser !== u);
+            artworks = artworks.filter(a => a.authorUser !== u);
+            members = members.filter(m => m.username !== u);
+            [...posts, ...books, ...artworks].forEach(p => {
+                if (p.comments) p.comments = p.comments.filter(c => c.user !== u);
+            });
+            currentUser = null;
+            localStorage.removeItem('ashraqat_currentUser');
+            Store.set('posts', posts);
+            Store.set('books', books);
+            Store.set('artworks', artworks);
+            Store.set('members', members);
+            viewedUser = null;
+            switchTab('feed');
+            renderAll();
+            toast('تمّ حذف حسابك نهائياً');
+        }
+
+        // ============ البروفايل ============
+        function recalcAuthorLikes() {
+            members.forEach(m => {
+                let total = 0;
+                [...posts, ...books, ...artworks].forEach(p => {
+                    if (p.authorUser === m.username) total += (p.likes || 0);
+                });
+                m.likes = total;
+            });
+            if (currentUser) {
+                const me = members.find(x => x.username === currentUser.username);
+                if (me) currentUser.likes = me.likes;
+            }
+        }
+
+        function openProfile(username) {
+            viewedUser = (currentUser && username === currentUser.username) ? null : username;
+            switchTab('profile');
+        }
+
+        function toggleFollow(targetUsername) {
+            if (!requireLogin()) return;
+            if (targetUsername === currentUser.username) return;
+
+            currentUser.following = currentUser.following || [];
+            let targetMem = members.find(m => m.username === targetUsername);
+            if (!targetMem) return;
+            targetMem.followers = targetMem.followers || [];
+
+            const followingIdx = currentUser.following.indexOf(targetUsername);
+            const followersIdx = targetMem.followers.indexOf(currentUser.username);
+
+            if (followingIdx > -1) {
+                currentUser.following.splice(followingIdx, 1);
+                if (followersIdx > -1) targetMem.followers.splice(followersIdx, 1);
+                toast('تم إلغاء المتابعة');
+            } else {
+                currentUser.following.push(targetUsername);
+                targetMem.followers.push(currentUser.username);
+                toast('تمت المتابعة بنجاح ✨');
+            }
+
+            let myMem = members.find(m => m.username === currentUser.username);
+            if (myMem) myMem.following = currentUser.following;
+
+            persist();
+            renderProfile();
+        }
+
+        function shareProfile(username) {
+            const shareableLink = window.location.origin + window.location.pathname + '?u=' + username;
+            navigator.clipboard.writeText(shareableLink).then(() => {
+                toast('تم نسخ رابط البروفايل المباشر! 🔗');
+            }).catch(() => {
+                navigator.clipboard.writeText('@' + username).then(() => {
+                    toast('تم نسخ اليوزر نيم 📋');
+                });
+            });
+        }
+
+        function renderProfile() {
+            const el = document.getElementById('profileContent');
+
+            const targetUsername = viewedUser || (currentUser && currentUser.username);
+            if (!targetUsername) {
+                el.innerHTML =
+                    `<div class="empty-state"><span class="big">👤</span>لم تُسجّل دخولك بعد.<br/><button class="btn btn-gold" style="margin-top:14px" onclick="openModal('loginModal')">🔐 دخول</button></div>`;
+                return;
+            }
+
+            recalcAuthorLikes();
+
+            let profile = members.find(m => m.username === targetUsername);
+            if (!profile && currentUser && targetUsername === currentUser.username) {
+                profile = currentUser;
+            }
+            if (!profile) {
+                const altSource = [...posts, ...books, ...artworks].find(x => x.authorUser === targetUsername);
+                if (altSource) {
+                    profile = {
+                        name: altSource.authorName,
+                        username: targetUsername,
+                        avatar: altSource.authorAvatar || avatarFor(altSource.authorName?.[0] || '؟'),
+                        bio: 'مفكّر ومبدع في فضاء الفكر الحر.',
+                        likes: 0,
+                        followers: [],
+                        following: []
+                    };
+                }
+            }
+
+            if (!profile) {
+                el.innerHTML =
+                    `<div class="empty-state"><span class="big">👤</span>هذا الحساب غير موجود بعد في قاعدة البيانات.</div>`;
+                return;
+            }
+
+            const isMe = currentUser && profile.username === currentUser.username;
+            const isF = profile.username === FOUNDER_USERNAME;
+
+            const textItems = [
+                ...posts.filter(p => p.authorUser === profile.username).map(p => ({ ...p, _type: 'feed' })),
+                ...books.filter(p => p.authorUser === profile.username).map(p => ({ ...p, _type: 'books' }))
+            ];
+            const myArt = artworks.filter(a => a.authorUser === profile.username);
+            const totalPosts = textItems.length + myArt.length;
+
+            const gridCells = [
+                ...myArt.map(a => `
+                    <div class="pg-cell" onclick="openArt('${a.id}')">
+                        <img src="${a.src}" alt="${esc(a.title)}" loading="lazy" onerror="this.src='${avatarFor('🖼')}'" />
+                        <div class="pg-badge">🎨 ${a.likes || 0} ❤</div>
+                    </div>`),
+                ...textItems.map(p => `
+                    <div class="pg-cell pg-text" onclick="switchTab('${p._type}')">
+                        <div class="pg-ico">${p._type === 'books' ? '📚' : '✍️'}</div>
+                        <div class="pg-ttl">${esc(p.title)}</div>
+                        <div class="pg-badge">${p.likes || 0} ❤</div>
+                    </div>`)
+            ].join('');
+
+            const followersCount = profile.followers ? profile.followers.length : 0;
+            const followingCount = profile.following ? profile.following.length : 0;
+            const isFollowingTarget = currentUser && currentUser.following && currentUser.following.includes(profile
+                .username);
+
+            el.innerHTML = `
+                ${viewedUser ? `<button class="btn btn-ghost" style="margin-bottom:14px" onclick="viewedUser=null;renderProfile()">→ العودة لحسابي</button>` : ''}
+                <div class="profile-cover" style="${profile.cover ? `background-image:url('${profile.cover}')` : ''}">
+                    ${isMe ? `<button class="cover-upload" onclick="document.getElementById('coverFile').click()">🖼️ تغيير الخلفية</button>
+                    <input type="file" id="coverFile" accept="image/*" style="display:none" onchange="changeCover(event)" />` : ''}
+                </div>
+                <div class="profile-header">
+                    <div class="profile-avatar-wrap">
+                        <img class="profile-avatar" src="${profile.avatar}" alt="صورة الحساب" />
+                        ${isMe ? `<button class="avatar-upload" onclick="document.getElementById('avatarFile').click()" title="تغيير الصورة">📷</button>
+                        <input type="file" id="avatarFile" accept="image/*" style="display:none" onchange="changeAvatar(event)" />` : ''}
+                    </div>
+                    <div class="profile-name">${esc(profile.name)} ${isF ? '☀️' : ''}</div>
+                    <div class="profile-user">@${esc(profile.username)}</div>
+                    <div class="profile-bio">${linkify(profile.bio || '')}</div>
+                    ${isF ? '<div class="badge-founder">المؤسِّسة والمالكة — صلاحيات الرقابة العليا فعّالة</div>' : ''}
+                    
+                    <div style="display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap;">
+                        <button class="btn btn-ghost" style="padding:5px 14px;font-size:12px" onclick="shareProfile('${profile.username}')">🔗 مشاركة الملف</button>
+                        ${(!isMe && currentUser) ? `
+                            <button class="btn ${isFollowingTarget ? 'btn-ghost' : 'btn-gold'}" style="padding:5px 14px;font-size:12px;" onclick="toggleFollow('${profile.username}')">
+                                ${isFollowingTarget ? '❌ إلغاء المتابعة' : '➕ متابعة'}
+                            </button>
+                        ` : ''}
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <div class="stat"><b>${totalPosts}</b><span>منشور</span></div>
+                    <div class="stat"><b>${followersCount}</b><span>متابع</span></div>
+                    <div class="stat"><b>${followingCount}</b><span>يتابع</span></div>
+                    <div class="stat"><b>${profile.likes || 0}</b><span>إعجاب</span></div>
+                </div>
+
+                ${isMe ? `
+                    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:8px">
+                        <button class="btn btn-ghost" onclick="openEditProfile()">✏️ تعديل الملف الشخصي</button>
+                        <button class="btn btn-ghost" onclick="logout()">🚪 تسجيل الخروج</button>
+                        <button class="btn btn-ghost" style="border-color:var(--red);color:var(--red)" onclick="deleteAccount()">🗑️ حذف الحساب</button>
+                    </div>` : ''}
+
+                <div class="pg-divider"><span>📌 كل المنشورات</span></div>
+                ${totalPosts ? `<div class="profile-grid">${gridCells}</div>`
+                    : `<div class="empty-state"><span class="big">🗒️</span>${isMe ? 'لم تنشر شيئاً بعد. شارك أول أطروحةٍ أو لوحة!' : 'لا منشورات لهذا الحساب بعد.'}</div>`}
+
+                ${isMe ? `
+                    <div class="donate-card">
+                        <h3>💛 بطاقة دعم المنصّة</h3>
+                        <p>تبرّعك يُسهم في استمرارية وتطوير فضاء أشرقت للفكر الحرّ ونشر الفن. كلُّ دينارٍ بذرةٌ في حقل الإبداع.</p>
+                        <div class="donate-account">
+                            <span id="acctNum">${DONATION_ACCOUNT}</span>
+                            <button class="copy-btn" onclick="copyAccount()" title="نسخ">📋</button>
+                        </div>
+                        <p style="margin-top:10px;font-size:12px;color:var(--muted)">رقم حساب الدعم الرسمي للمنصّة</p>
+                    </div>` : ''}
+            `;
+        }
+
+        function openEditProfile() {
+            if (!currentUser) return;
+            document.getElementById('epName').value = currentUser.name || '';
+            document.getElementById('epBio').value = currentUser.bio || '';
+            openModal('editProfileModal');
+        }
+
+        function saveProfile() {
+            const name = document.getElementById('epName').value.trim();
+            const bio = document.getElementById('epBio').value.trim();
+            if (!name) { toast('يرجى إدخال الاسم'); return; }
+
+            currentUser.name = name;
+            currentUser.bio = bio;
+            const me = members.find(m => m.username === currentUser.username);
+            if (me) {
+                me.name = name;
+                me.bio = bio;
+            }
+            [...posts, ...books, ...artworks].forEach(p => { if (p.authorUser === currentUser.username) p.authorName = name; });
+            persist();
+            closeModal('editProfileModal');
+            renderAll();
+            toast('تمّ تحديث ملفك الشخصي ✨');
+        }
+
+        function changeAvatar(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = ev => {
+                currentUser.avatar = ev.target.result;
+                const me = members.find(m => m.username === currentUser.username);
+                if (me) me.avatar = currentUser.avatar;
+                [...posts, ...books, ...artworks].forEach(p => {
+                    if (p.authorUser === currentUser.username) p.authorAvatar =
+                        currentUser.avatar;
+                });
+                persist();
+                renderAll();
+                toast('تمّ تحديث صورة الحساب 📷');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function changeCover(e) {
+            const file = e.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = ev => {
+                currentUser.cover = ev.target.result;
+                const me = members.find(m => m.username === currentUser.username);
+                if (me) me.cover = currentUser.cover;
+                persist();
+                if (currentTab === 'profile') renderProfile();
+                toast('تمّ تحديث خلفية الملف 🖼️');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function copyAccount() {
+            navigator.clipboard.writeText(DONATION_ACCOUNT).then(() => toast('تمّ نسخ رقم الحساب ✅'));
+        }
+
+        // ============ العرض ============
+        function renderFeed() {
+            const list = document.getElementById('feedList');
+            if (!list) return;
+
+            if (!posts || posts.length === 0) {
+                list.innerHTML = `<div class="empty-state"><span class="big">📝</span>لا توجد منشورات حالياً. كن أول من يكتب!</div>`;
+                return;
+            }
+
+            // نسخ المنشورات لترتيبها
+            let items = [...posts];
+
+            // ترتيب المنشورات دائماً من الأحدث إلى الأقدم بناءً على تاريخ الإنشاء
+            items.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+
+            list.innerHTML = items.map(item => {
+                if (item._type === 'art') return artFeedCard(item);
+                return postCard(item, item._type);
+            }).join('');
+        }
+
+        function renderBooks() {
+            const list = document.getElementById('booksList');
+            if (!books.length) {
+                list.innerHTML =
+                    `<div class="empty-state"><span class="big">📚</span>الخزانة فارغة. أودِع أول مخطوطةٍ أدبية.</div>`;
+                return;
+            }
+            list.innerHTML = books.map(p => postCard(p, 'books')).join('');
+        }
+
+        function renderAll() {
+            renderAuthArea();
+            renderComposers();
+            renderFeed();
+            renderBooks();
+            renderArt();
+            if (currentTab === 'profile') renderProfile();
+        }
+
+        // ============ الإقلاع ============
+        posts = Store.get('posts', posts);
+        books = Store.get('books', books);
+        artworks = Store.get('artworks', artworks);
+        members = Store.get('members', members);
+
+        recalcAuthorLikes();
+        renderAll();
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const userParam = urlParams.get('u');
+        if (userParam) {
+            viewedUser = userParam;
+            switchTab('profile');
+        }
+
+        // ============ Firebase (Firebase Realtime Database) ============
+        // إعدادات Firebase الخاصة بمشروعكِ
+        const firebaseConfig = {
+            apiKey: "YOUR_API_KEY",
+            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+            databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+            projectId: "YOUR_PROJECT_ID",
+            storageBucket: "YOUR_PROJECT_ID.appspot.com",
+            messagingSenderId: "YOUR_SENDER_ID",
+            appId: "YOUR_APP_ID"
+        };
+
+        // تشغيل Firebase
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.database();
+
+        // تعديل دالة الحفظ لترفع البيانات أونلاين بدلاً من الذاكرة المحلية فقط
+        function persist() {
+            // رفع القوائم إلى السحابة لتصبح متاحة أونلاين فوراً لكل الزوار
+            db.ref('platform_data/posts').set(posts);
+            db.ref('platform_data/books').set(books);
+            db.ref('platform_data/artworks').set(artworks);
+
+            // الحساب الحالي يمكن أن يبقى في الذاكرة المحلية للجهاز لحفظ الجلسة
+            if (currentUser) Store.set('currentUser', currentUser);
+        }
+
+        // دالة لجلب البيانات أونلاين فور فتح أي مستخدم للموقع
+        function loadOnlineData() {
+            db.ref('platform_data').on('value', (snapshot) => {
+                const data = snapshot.val();
+                if (data) {
+                    posts = data.posts || [];
+                    books = data.books || [];
+                    artworks = data.artworks || [];
+
+                    // إعادة بناء الواجهة تلقائياً وبشكل حي (Realtime) بمجرد أن ينشر أي شخص
+                    renderAll();
+                }
+            });
+        }
+
+        // استدعي دالة التحميل السحابي عند تشغيل الموقع بدلاً من التحميل المحلي القديم
+        window.addEventListener('DOMContentLoaded', () => {
+            loadOnlineData();
+        });
+
+        // --- إعادة التفعيل ---
+        renderAll();
+    </script>
+
+</body>
+
+</html>
