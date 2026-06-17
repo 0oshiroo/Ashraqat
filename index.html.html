@@ -1668,10 +1668,12 @@
 
         function logout() {
             currentUser = null;
+            Store.set('currentUser', null);
             localStorage.removeItem('ashraqat_currentUser');
             renderAll();
             toast('تمّ تسجيل الخروج');
         }
+
 
         // ============ شريط الهوية ============
         function renderAuthArea() {
@@ -2471,47 +2473,59 @@
         // ============ Firebase (Firebase Realtime Database) ============
         // إعدادات Firebase الخاصة بمشروعكِ
         const firebaseConfig = {
-            apiKey: "YOUR_API_KEY",
-            authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-            databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-            projectId: "YOUR_PROJECT_ID",
-            storageBucket: "YOUR_PROJECT_ID.appspot.com",
-            messagingSenderId: "YOUR_SENDER_ID",
-            appId: "YOUR_APP_ID"
+            apiKey: "AIzaSyAJ58jt4HDxyBvOjUF9F3JS7pIwITU_J9Q",
+            authDomain: "ashraqat-2d723.firebaseapp.com",
+            projectId: "ashraqat-2d723",
+            storageBucket: "ashraqat-2d723.firebasestorage.app",
+            messagingSenderId: "779713061566",
+            appId: "1:779713061566:web:1f653c35cfca9e6a1ff4ef",
+            measurementId: "G-DBDWW61P77"
         };
+
 
         // تشغيل Firebase
         firebase.initializeApp(firebaseConfig);
         const db = firebase.database();
 
-        // تعديل دالة الحفظ لترفع البيانات أونلاين بدلاً من الذاكرة المحلية فقط
+        // تعديل دالة الحفظ لتصبح "المصدر الحقيقي" أونلاين للجميع
         function persist() {
-            // رفع القوائم إلى السحابة لتصبح متاحة أونلاين فوراً لكل الزوار
-            db.ref('platform_data/posts').set(posts);
-            db.ref('platform_data/books').set(books);
-            db.ref('platform_data/artworks').set(artworks);
-            db.ref('platform_data/users').set(members); // حل مشكلة: الحساب غير موجود
+            // حفظ محلي (لتجربة/جلب سريع)
+            Store.set('posts', posts);
+            Store.set('books', books);
+            Store.set('artworks', artworks);
+            Store.set('members', members);
+            if (currentUser) Store.set('currentUser', currentUser);
 
-            // الاحتفاظ بجلسة تسجيل الدخول الحالية للمستخدم على جهازه فقط
-            if (typeof currentUser !== 'undefined' && currentUser) {
-                Store.set('currentUser', currentUser);
-            }
+            // حفظ أونلاين بصيغة آمنة: بدلاً من set لقائمة كاملة (قد يسبب تعارض/عدم تطابق)
+            // نكتب كل نوع تحت key باسم معرف العنصر.
+            // ملاحظة: هذا يحافظ على الواجهة لأننا نبقي arrays في الذاكرة.
+            db.ref('platform_data/posts').set(Object.fromEntries(posts.map(p => [p.id, p])));
+            db.ref('platform_data/books').set(Object.fromEntries(books.map(p => [p.id, p])));
+            db.ref('platform_data/artworks').set(Object.fromEntries(artworks.map(a => [a.id, a])));
+            db.ref('platform_data/users').set(Object.fromEntries((members || []).map(m => [m.username, m])));
         }
 
         // دالة لجلب البيانات أونلاين فور فتح أي مستخدم للموقع
         function loadOnlineData() {
             db.ref('platform_data').on('value', (snapshot) => {
-                const data = snapshot.val();
-                if (data) {
-                    posts = data.posts || [];
-                    books = data.books || [];
-                    artworks = data.artworks || [];
+                const data = snapshot.val() || {};
 
-                    // إعادة بناء الواجهة تلقائياً وبشكل حي (Realtime) بمجرد أن ينشر أي شخص
-                    renderAll();
-                }
+                const postsMap = data.posts || {};
+                const booksMap = data.books || {};
+                const artworksMap = data.artworks || {};
+                const usersMap = data.users || {};
+
+                posts = Object.values(postsMap || {});
+                books = Object.values(booksMap || {});
+                artworks = Object.values(artworksMap || {});
+                members = Object.values(usersMap || {});
+
+                // إعادة حساب likes للمرجعية
+                recalcAuthorLikes();
+                renderAll();
             });
         }
+
 
         // استدعي دالة التحميل السحابي عند تشغيل الموقع بدلاً من التحميل المحلي القديم
         window.addEventListener('DOMContentLoaded', () => {
