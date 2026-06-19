@@ -1516,6 +1516,32 @@
         window.handleLogin = handleLogin; window.handleRegister = handleRegister; window.handleLogout = handleLogout;
         window.execCmd = execCmd; window.insertImageUrl = insertImageUrl; window.openModal = openModal;
         window.closeModal = closeModal; window.navigateTo = navigateTo; window.toggleTheme = toggleTheme;
+
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "firebase/app";
+        import { getAnalytics } from "firebase/analytics";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJ58jt4HDxyBvOjUF9F3JS7pIwITU_J9Q",
+            authDomain: "ashraqat-2d723.firebaseapp.com",
+            projectId: "ashraqat-2d723",
+            storageBucket: "ashraqat-2d723.firebasestorage.app",
+            messagingSenderId: "779713061566",
+            appId: "1:779713061566:web:0567757950ce2f561ff4ef",
+            measurementId: "G-8V4QPYENLG"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+
+
+
     </script>
 </body>
 
