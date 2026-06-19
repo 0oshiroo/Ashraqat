@@ -1,6 +1,3 @@
-تم استبدال إعدادات Firebase القديمة بالجديدة التي زودتني بها. إليك كود الموقع بالكامل مع التحديث:
-
-```html
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 
@@ -118,16 +115,12 @@
             color: inherit;
         }
 
-        .spiral-logo {
-            width: var(--spiral-size);
-            height: var(--spiral-size);
-            flex-shrink: 0;
-        }
-
-        .spiral-logo svg {
-            width: 100%;
-            height: 100%;
+        .spiral-char {
+            font-size: 2.4rem;
+            color: var(--burgundy-glow);
+            display: inline-block;
             animation: spiralRotate 4s linear infinite;
+            line-height: 1;
         }
 
         @keyframes spiralRotate {
@@ -138,13 +131,6 @@
             to {
                 transform: rotate(360deg)
             }
-        }
-
-        .spiral-path {
-            fill: none;
-            stroke: var(--burgundy-glow);
-            stroke-width: 2.5;
-            stroke-linecap: round;
         }
 
         .nav-title {
@@ -437,6 +423,7 @@
             max-width: 100%;
             border-radius: var(--radius-sm);
             margin: 8px 0;
+            height: auto;
         }
 
         .post-card .post-content blockquote {
@@ -606,6 +593,7 @@
         .editor-area img {
             max-width: 100%;
             border-radius: var(--radius-sm);
+            height: auto;
         }
 
         /* FORM ELEMENTS */
@@ -853,13 +841,7 @@
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="nav-brand" onclick="navigateTo('feed')" title="أثر حر - الرئيسية">
-            <div class="spiral-logo">
-                <svg viewBox="0 0 40 40">
-                    <path class="spiral-path"
-                        d="M20 20 Q22 10 30 8 Q36 7 34 14 Q32 20 26 22 Q18 24 14 18 Q10 12 14 7 Q18 2 26 4 Q34 6 32 14"
-                        fill="none" stroke-linecap="round" />
-                </svg>
-            </div>
+            <span class="spiral-char">𖦹</span>
             <span class="nav-title">أثر حر</span>
         </div>
         <div class="nav-links" id="navLinks">
@@ -923,7 +905,11 @@
                 <button onclick="execCmd('justifyRight')" title="محاذاة لليمين">⏩</button>
                 <button onclick="execCmd('justifyCenter')" title="توسيط">⏺️</button>
                 <button onclick="execCmd('justifyLeft')" title="محاذاة لليسار">⏪</button>
-                <button onclick="insertImageUrl()" title="إدراج صورة">🖼️</button>
+                <button onclick="document.getElementById('imageUploadInput').click()"
+                    title="إدراج صورة من الجهاز">📷</button>
+                <input type="file" id="imageUploadInput" accept="image/*" style="display:none;"
+                    onchange="handleImageUpload(this)">
+                <button onclick="insertImageUrl()" title="إدراج صورة برابط">🖼️</button>
                 <button onclick="execCmd('insertOrderedList')" title="قائمة مرقمة">1.</button>
                 <button onclick="execCmd('insertUnorderedList')" title="قائمة نقطية">•</button>
                 <button onclick="execCmd('blockquote')" title="اقتباس">❝</button>
@@ -1031,10 +1017,14 @@
             </div>
         </div>
 
-        <!-- ADMIN PAGE -->
+        <!-- ADMIN PAGE (full control: posts + users) -->
         <div class="page" id="page-admin">
             <h3 style="font-family:var(--font-heading);color:var(--burgundy-glow);">🛡️ لوحة التحكم الإدارية</h3>
-            <p style="color:var(--text-muted);margin-bottom:12px;">إدارة المنشورات والتعليقات - الصلاحيات الكاملة</p>
+            <p style="color:var(--text-muted);margin-bottom:12px;">تحكم كامل بالموقع - صلاحيات المالك "أشرقت عادل"</p>
+            <div class="feed-tabs">
+                <button class="active-tab" onclick="switchAdminTab('posts',this)">📜 إدارة المنشورات</button>
+                <button onclick="switchAdminTab('users',this)">👥 إدارة المستخدمين</button>
+            </div>
             <div id="adminContent">
                 <p style="color:var(--text-muted);">جاري التحميل...</p>
             </div>
@@ -1089,10 +1079,12 @@
     <!-- FIREBASE SCRIPT -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-analytics.js";
         import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, where, orderBy, updateDoc, deleteDoc, onSnapshot, limit, increment } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc, collection, addDoc, getDocs, query, where, orderBy, updateDoc, deleteDoc, onSnapshot, limit, increment, writeBatch } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-storage.js";
 
-        // ============ إعدادات Firebase الجديدة ============
+        // ============ إعدادات Firebase ============
         const firebaseConfig = {
             apiKey: "AIzaSyAJ58jt4HDxyBvOjUF9F3JS7pIwITU_J9Q",
             authDomain: "ashraqat-2d723.firebaseapp.com",
@@ -1104,13 +1096,16 @@
         };
 
         const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app); // تفعيل التحليلات
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const storage = getStorage(app);
 
         // ==================== GLOBAL STATE ====================
         let currentUser = null;
         let currentUserData = null;
         let currentFeedTab = 'all';
+        let currentAdminTab = 'posts';
         const ADMIN_EMAIL = "ashraqat.adel@freimprint.com";
         let allPostsCache = [];
         let followsCache = new Set();
@@ -1177,6 +1172,13 @@
             renderFeed(allPostsCache);
         };
 
+        window.switchAdminTab = (tab, btn) => {
+            currentAdminTab = tab;
+            document.querySelectorAll('#page-admin .feed-tabs button').forEach(b => b.classList.remove('active-tab'));
+            if (btn) btn.classList.add('active-tab');
+            loadAdminPanel();
+        };
+
         function updateNavButtons() {
             const activePage = document.querySelector('.page.active')?.id.replace('page-', '');
             document.querySelectorAll('#navLinks button[data-page]').forEach(b => b.classList.toggle('active', b.dataset.page === activePage));
@@ -1223,6 +1225,27 @@
         window.insertImageUrl = () => { const url = prompt('أدخل رابط الصورة:', 'https://'); if (url) { document.execCommand('insertImage', false, url); $('editorArea').focus(); } };
         $('editorArea').addEventListener('focus', () => document.body.classList.add('allow-select'));
         $('editorArea').addEventListener('blur', () => document.body.classList.remove('allow-select'));
+
+        // ==================== IMAGE UPLOAD FROM DEVICE ====================
+        window.handleImageUpload = async (input) => {
+            const file = input.files[0];
+            if (!file) return;
+            if (!currentUser) { showToast('⚠️ يرجى تسجيل الدخول'); return; }
+            const storageRef = ref(storage, `postImages/${currentUser.uid}/${Date.now()}_${file.name}`);
+            try {
+                showToast('⏳ جاري رفع الصورة...');
+                const snapshot = await uploadBytes(storageRef, file);
+                const url = await getDownloadURL(snapshot.ref);
+                // Insert image at cursor position
+                $('editorArea').focus();
+                document.execCommand('insertImage', false, url);
+                showToast('✅ تم رفع الصورة وإدراجها');
+            } catch (error) {
+                console.error('Upload failed:', error);
+                showToast('❌ فشل رفع الصورة');
+            }
+            input.value = ''; // clear input
+        };
 
         // ==================== POSTING ====================
         window.publishPost = async () => {
@@ -1477,21 +1500,76 @@
             closeModal('editProfileModal'); updateProfilePage(); showToast('✅ تم تحديث البروفايل');
         };
 
-        // ==================== ADMIN ====================
+        // ==================== ADMIN PANEL (Posts + Users) ====================
         async function loadAdminPanel() {
-            if (!currentUser || !currentUserData?.isAdmin) { $('adminContent').innerHTML = '<p style="color:var(--crimson-bright);">🚫 لا تملك صلاحيات إدارية.</p>'; return; }
-            const snap = await getDocs(query(collection(db, 'posts'), where('isDraft', '==', false), orderBy('createdAt', 'desc'), limit(50)));
-            const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
-            let html = `<p style="color:var(--text-muted);">${posts.length} منشور</p>`;
-            for (const p of posts) {
-                html += `<div style="background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;margin:8px 0;">
-                    <strong>${p.authorName || 'مجهول'}</strong> | ${p.type} | ${new Date(p.createdAt).toLocaleString('ar')}
-                    <p style="font-size:0.8rem;color:var(--text-muted);">${p.plainText?.substring(0, 120) || '...'}</p>
-                    <button class="btn-outline btn-sm" onclick="deletePost('${p.id}')">🗑️ حذف المنشور</button>
-                </div>`;
+            if (!currentUser || !currentUserData?.isAdmin) {
+                $('adminContent').innerHTML = '<p style="color:var(--crimson-bright);">🚫 لا تملك صلاحيات إدارية. هذه اللوحة خاصة بالمالك "أشرقت عادل".</p>';
+                return;
             }
-            $('adminContent').innerHTML = html;
+            if (currentAdminTab === 'posts') {
+                const snap = await getDocs(query(collection(db, 'posts'), where('isDraft', '==', false), orderBy('createdAt', 'desc'), limit(50)));
+                const posts = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                let html = `<p style="color:var(--text-muted);margin-bottom:10px;">إجمالي المنشورات: ${posts.length}</p>`;
+                for (const p of posts) {
+                    html += `<div style="background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;margin:8px 0;">
+                        <strong>${p.authorName || 'مجهول'}</strong> | ${p.type} | ${new Date(p.createdAt).toLocaleString('ar')}
+                        <p style="font-size:0.8rem;color:var(--text-muted);">${p.plainText?.substring(0, 120) || '...'}</p>
+                        <button class="btn-outline btn-sm" onclick="deletePost('${p.id}')">🗑️ حذف المنشور</button>
+                    </div>`;
+                }
+                $('adminContent').innerHTML = html;
+            } else if (currentAdminTab === 'users') {
+                const snap = await getDocs(collection(db, 'users'));
+                const users = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+                let html = `<p style="color:var(--text-muted);margin-bottom:10px;">عدد المستخدمين: ${users.length}</p>`;
+                for (const u of users) {
+                    html += `<div style="background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;">
+                        <div>
+                            <strong>${u.displayName || u.email}</strong>
+                            <span style="color:var(--text-muted);font-size:0.8rem;">(@${u.username || ''}) ${u.isAdmin ? '(مدير)' : ''}</span>
+                        </div>
+                        <button class="btn-outline btn-sm" onclick="deleteUser('${u.id}')" style="color:var(--crimson-bright);">🗑️ حذف المستخدم</button>
+                    </div>`;
+                }
+                $('adminContent').innerHTML = html;
+            }
         }
+
+        window.deleteUser = async (userId) => {
+            if (!currentUserData?.isAdmin) return;
+            if (userId === currentUser.uid) { showToast('⚠️ لا يمكنك حذف حسابك الإداري من هنا'); return; }
+            if (!confirm('سيتم حذف المستخدم وجميع بياناته (منشورات، تعليقات، متابعات، إعجابات، محفوظات، مسودات). هل أنت متأكد؟')) return;
+            const batch = writeBatch(db);
+            // حذف المنشورات
+            const postsSnap = await getDocs(query(collection(db, 'posts'), where('authorId', '==', userId)));
+            postsSnap.forEach(d => batch.delete(d.ref));
+            // حذف التعليقات
+            const commentsSnap = await getDocs(query(collection(db, 'comments'), where('authorId', '==', userId)));
+            commentsSnap.forEach(d => batch.delete(d.ref));
+            // حذف المتابعات (follower/following)
+            const follows1 = await getDocs(query(collection(db, 'follows'), where('followerId', '==', userId)));
+            const follows2 = await getDocs(query(collection(db, 'follows'), where('followingId', '==', userId)));
+            follows1.forEach(d => batch.delete(d.ref));
+            follows2.forEach(d => batch.delete(d.ref));
+            // حذف الإعجابات
+            const likesSnap = await getDocs(query(collection(db, 'likes'), where('userId', '==', userId)));
+            likesSnap.forEach(d => batch.delete(d.ref));
+            // حذف المحفوظات
+            const bmSnap = await getDocs(query(collection(db, 'bookmarks'), where('userId', '==', userId)));
+            bmSnap.forEach(d => batch.delete(d.ref));
+            // حذف المسودات
+            const draftsSnap = await getDocs(query(collection(db, 'drafts'), where('authorId', '==', userId)));
+            draftsSnap.forEach(d => batch.delete(d.ref));
+            // حذف وثيقة المستخدم
+            batch.delete(doc(db, 'users', userId));
+            try {
+                await batch.commit();
+                showToast('🗑️ تم حذف المستخدم وكل بياناته');
+                loadAdminPanel();
+            } catch (e) {
+                showToast('❌ فشل الحذف: ' + e.message);
+            }
+        };
 
         // ==================== SCREENSHOT BLOCK ====================
         document.addEventListener('keydown', e => {
@@ -1519,6 +1597,8 @@
         window.handleLogin = handleLogin; window.handleRegister = handleRegister; window.handleLogout = handleLogout;
         window.execCmd = execCmd; window.insertImageUrl = insertImageUrl; window.openModal = openModal;
         window.closeModal = closeModal; window.navigateTo = navigateTo; window.toggleTheme = toggleTheme;
+        window.handleImageUpload = handleImageUpload; window.switchAdminTab = switchAdminTab;
+        window.deleteUser = deleteUser;
     </script>
 </body>
 
